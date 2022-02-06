@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/posts', [PostController::class, 'displayPosts'])->name('posts.display');
+Route::get('/post/{id}', [PostController::class, 'displayPost'])->name('post.display');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+
+/**
+ * ! Routes API
+ */
+Route::get('/api/posts', [PostController::class, 'sendPosts'])->name('posts.send');
+Route::get('/api/post/{id}', [PostController::class, 'sendPost'])->name('post.send');
+
+
+require __DIR__ . '/auth.php';
