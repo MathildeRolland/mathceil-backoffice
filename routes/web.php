@@ -15,20 +15,18 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/posts', [PostController::class, 'displayPosts'])->name('posts.display');
-Route::get('/post/{id}', [PostController::class, 'displayPost'])->name('post.display');
+Route::get('/', [HomeController::class, 'home'])
+    ->middleware('auth')
+    ->name('home');
+Route::get('/posts', [PostController::class, 'displayPosts'])
+    ->middleware('auth')
+    ->name('posts.display');
+Route::get('/post/{id}', [PostController::class, 'displayPost'])
+    ->middleware('auth')
+    ->name('post.display');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-
-/**
- * ! Routes API
- */
-Route::get('/api/posts', [PostController::class, 'sendPosts'])->name('posts.send');
-Route::get('/api/post/{id}', [PostController::class, 'sendPost'])->name('post.send');
-
 
 require __DIR__ . '/auth.php';
