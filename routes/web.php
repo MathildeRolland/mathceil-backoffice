@@ -15,20 +15,40 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/posts', [PostController::class, 'displayPosts'])->name('posts.display');
-Route::get('/post/{id}', [PostController::class, 'displayPost'])->name('post.display');
+Route::get('/', [HomeController::class, 'home'])
+    ->middleware('auth')
+    ->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/posts', [PostController::class, 'displayPosts'])
+    ->middleware('auth')
+    ->name('posts.display');
 
+Route::get('/post/{id}', [PostController::class, 'displayPost'])
+    ->middleware('auth')
+    ->name('post.display');
 
-/**
- * ! Routes API
- */
-Route::get('/api/posts', [PostController::class, 'sendPosts'])->name('posts.send');
-Route::get('/api/post/{id}', [PostController::class, 'sendPost'])->name('post.send');
+Route::get('/posts/create', [PostController::class, 'create'])
+    ->middleware('auth')
+    ->name('create');
 
+Route::post('/posts/create', [PostController::class, 'store'])
+    ->middleware('auth')
+    ->name('post.create');
+
+Route::get('/post/{id}/update', [PostController::class, 'update'])
+    ->middleware('auth')
+    ->name('post.update');
+
+Route::post('/post/{id}/update', [PostController::class, 'edit'])
+    ->middleware('auth')
+    ->name('post.update');
+
+Route::get('/post/{id}/delete', [PostController::class, 'delete'])
+    ->middleware('auth')
+    ->name('post.delete');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

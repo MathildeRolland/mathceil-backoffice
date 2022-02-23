@@ -21,7 +21,7 @@ class PostController extends Controller
         return (view('post', ['post' => $post]));
     }
 
-    public function add()
+    public function create()
     {
         return (view('create'));
     }
@@ -32,6 +32,37 @@ class PostController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
+
+        $lastPosts = Post::orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('welcome', ['posts' => $lastPosts]);
+    }
+
+    public function update($id)
+    {
+        $postToUpdate = Post::findOrFail($id);
+
+        return view('update', ['post' => $postToUpdate]);
+    }
+
+    public function edit(Request $request)
+    {
+        $postToUpdate = Post::findOrFail($request->id);
+
+        Post::whereId($request->id)->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect('/posts');
+    }
+
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect('/posts');
     }
 
 
