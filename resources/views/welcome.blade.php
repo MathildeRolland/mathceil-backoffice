@@ -5,7 +5,6 @@
 <div class="container min-h-screen mx-auto bg-light py-4">
     <h1 class="text-center text-xl px-3 my-6 tablet:my-10">Bienvenue sur le back-office de Math.Ceil!</h1>
 
-
     <div class="tablet:w-4/5 desktop:w-3/5 px-3 tablet:m-auto mt-8 tablet:mt-5 flex flex-col">
         <div class="self-end border border-add rounded px-2 py-0.5">
             <a href="{{ Route('create') }}" class="flex justify-center items-center cursor-pointer">
