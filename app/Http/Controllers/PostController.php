@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -23,15 +24,20 @@ class PostController extends Controller
 
     public function create()
     {
-        return (view('create'));
+        $categories = Category::all();
+
+        return (view('create', ['categories' => $categories]));
     }
 
     public function store(Request $request)
     {
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
+            'summary' => $request->summary,
             'content' => $request->content,
         ]);
+
+        $post->categories()->attach($request->categories);
 
         $lastPosts = Post::orderBy('created_at', 'desc')->take(5)->get();
 
@@ -40,19 +46,23 @@ class PostController extends Controller
 
     public function update($id)
     {
-        $postToUpdate = Post::findOrFail($id);
+        $postToUpdate = Post::with('categories')->findOrFail($id);
+        $categories = Category::all();
 
-        return view('update', ['post' => $postToUpdate]);
+        return view('update', ['post' => $postToUpdate, 'categories' => $categories]);
     }
 
     public function edit(Request $request)
     {
-        $postToUpdate = Post::findOrFail($request->id);
+        // $postToUpdate = Post::findOrFail($request->id);
 
-        Post::whereId($request->id)->update([
+        $postToUpdate = Post::whereId($request->id)->update([
             'title' => $request->title,
+            'summary' => $request->summary,
             'content' => $request->content,
         ]);
+
+        $postToUpdate->categories()->attach($request->categories);
 
         return redirect('/posts');
     }
@@ -75,7 +85,8 @@ class PostController extends Controller
      */
     public function sendPosts()
     {
-        $posts = Post::all();
+        $posts = Post::with('categories')->get();
+
         return response()->json([
             'posts' => $posts,
         ]);
@@ -83,7 +94,8 @@ class PostController extends Controller
 
     public function sendPost($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with('categories')->findOrFail($id);
+
         return response()->json([
             'post' => $post
         ]);

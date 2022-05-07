@@ -22,6 +22,11 @@
     </div>
     <div class="mt-5 tablet:mt-8">
         <h1 class="text-2xl text-center">{{ $post->title }}</h1>
+        <div class="flex justify-end mt-6">
+            @foreach ($post->categories as $category)
+                <x-tag name="{{ $category->name }}" />
+            @endforeach
+        </div>
         <p class="mt-8 px-2">{!! $post->content !!}</p>
     </div>
 </div>

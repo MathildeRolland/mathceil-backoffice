@@ -20,13 +20,31 @@
                 @enderror
             </div>
 
-            <div class="flex flex-col h-5/6">
+            <div class="flex flex-col">
+                <label for="summary">Résumé</label>
+                <textarea type="text" id="summary" name="summary" rows="2" class="rounded border-0.5 border-grey shadow-md shadow-grey-500 @error('summary') is-invalid @else is-valid @enderror"></textarea>
+
+                @error('summary')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="flex flex-col mt-6">
+                <label for="categories">Catégories</label>
+                <select name="categories[]" multiple class="rounded border-0.5 border-grey shadow-md shadow-grey-500 @error('categories') is-invalid @else is-valid @enderror">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex flex-col h-5/6 mt-6">
                 <label for="content">Contenu</label>
                 <textarea id="content" name="content"></textarea>
             </div>
 
             <div class="self-end">
-                <button class="bg-pink px-10 py-1 rounded text-light mt-4 self-end w-40 cursor-pointer">Visualiser</button>
+                <button class="border border-pink px-10 py-1 rounded text-pink mt-4 self-end w-40 cursor-pointer">Visualiser</button>
                 <input type="submit" value="publier" class="bg-pink px-10 py-1 rounded text-light mt-4 w-40 cursor-pointer">
             </div>
         </form>
