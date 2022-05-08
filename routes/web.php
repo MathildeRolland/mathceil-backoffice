@@ -68,5 +68,9 @@ Route::post('category/{id}/update', [CategoryController::class, 'edit'])
     ->middleware('auth')
     ->name('category.edit');
 
+Route::get('category/{id}/delete', [CategoryController::class, 'delete'])
+    ->middleware('auth')
+    ->name('category.delete');
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/api.php';

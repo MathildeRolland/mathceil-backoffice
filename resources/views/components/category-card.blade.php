@@ -14,10 +14,10 @@
                 <x-gmdi-edit class="text-light m-1" />
             </x-card-action-link>
         </div>
-        {{-- <div class="w-8 rounded bg-danger">
+        <div class="w-8 rounded bg-danger">
             <x-card-action-link :href="route('category.delete', ['id' => $categoryId])">
                 <x-ri-delete-bin-2-fill class="text-light m-1.5" />
             </x-card-action-link>
-        </div> --}}
+        </div>
     </div>
 </div>
