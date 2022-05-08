@@ -7,7 +7,7 @@
 
     <div class="tablet:w-4/5 desktop:w-3/5 px-3 tablet:m-auto mt-8 tablet:mt-5 flex flex-col">
         <div class="group self-end border border-add hover:border-add bg-light hover:bg-add rounded px-2 py-0.5">
-            <a href="{{ Route('create') }}" class="flex justify-center items-center cursor-pointer">
+            <a href="{{ Route('post.create') }}" class="flex justify-center items-center cursor-pointer">
                 <x-zondicon-add-solid class="block w-5 text-add group-hover:text-light" />
                 <p class="ml-4 text-add group-hover:text-light">Nouvel article</p>
             </a>
