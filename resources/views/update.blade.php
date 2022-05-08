@@ -9,7 +9,7 @@
     </x-breadcrumb>
     <div class="mt-5">
         <h1 class="text-2xl text-center my-15 tablet:mt-16">Modifier l'article {{ $post->id }}</h1>
-        <form method="POST" action="{{ Route('post.update', ['id' => $post->id]) }}" class="px-2 mt-5 flex flex-col">
+        <form method="POST" action="{{ Route('post.edit', ['id' => $post->id]) }}" class="px-2 mt-5 flex flex-col">
             @csrf
             <div class="flex flex-col my-6">
                 <label for="title">Titre</label>

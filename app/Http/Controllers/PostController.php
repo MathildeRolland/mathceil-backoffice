@@ -54,9 +54,9 @@ class PostController extends Controller
 
     public function edit(Request $request)
     {
-        // $postToUpdate = Post::findOrFail($request->id);
+        $postToUpdate = Post::whereId($request->id)->first();
 
-        $postToUpdate = Post::whereId($request->id)->update([
+        $postToUpdate->update([
             'title' => $request->title,
             'summary' => $request->summary,
             'content' => $request->content,

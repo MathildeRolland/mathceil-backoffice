@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,11 @@ Route::get('/post/{id}', [PostController::class, 'displayPost'])
 
 Route::get('/posts/create', [PostController::class, 'create'])
     ->middleware('auth')
-    ->name('create');
+    ->name('post.create');
 
 Route::post('/posts/create', [PostController::class, 'store'])
     ->middleware('auth')
-    ->name('post.create');
+    ->name('post.store');
 
 Route::get('/post/{id}/update', [PostController::class, 'update'])
     ->middleware('auth')
@@ -41,11 +42,35 @@ Route::get('/post/{id}/update', [PostController::class, 'update'])
 
 Route::post('/post/{id}/update', [PostController::class, 'edit'])
     ->middleware('auth')
-    ->name('post.update');
+    ->name('post.edit');
 
 Route::get('/post/{id}/delete', [PostController::class, 'delete'])
     ->middleware('auth')
     ->name('post.delete');
+
+Route::get('/categories', [CategoryController::class, 'displayCategories'])
+    ->middleware('auth')
+    ->name('categories.display');
+
+Route::get('/categories/create', [CategoryController::class, 'create'])
+    ->middleware('auth')
+    ->name('category.create');
+
+Route::post('/categories/create', [CategoryController::class, 'store'])
+    ->middleware('auth')
+    ->name('category.store');
+
+Route::get('category/{id}/update', [CategoryController::class, 'update'])
+    ->middleware('auth')
+    ->name('category.update');
+
+Route::post('category/{id}/update', [CategoryController::class, 'edit'])
+    ->middleware('auth')
+    ->name('category.edit');
+
+Route::get('category/{id}/delete', [CategoryController::class, 'delete'])
+    ->middleware('auth')
+    ->name('category.delete');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/api.php';

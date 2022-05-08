@@ -16,6 +16,9 @@
                     <x-nav-link :href="route('posts.display')" :active="request()->routeIs('posts.display')">
                         {{ __('Articles') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('categories.display')" :active="request()->routeIs('categories.display')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                     @endauth
                 </div>
             </div>
@@ -77,6 +80,9 @@
             @auth
             <x-responsive-nav-link :href="route('posts.display')" :active="request()->routeIs('posts.display')">
                 {{ __('Articles') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categories.display')" :active="request()->routeIs('categories.display')">
+                {{ __('Categories') }}
             </x-responsive-nav-link>
             @endauth
         </div>
