@@ -60,5 +60,13 @@ Route::post('/categories/create', [CategoryController::class, 'store'])
     ->middleware('auth')
     ->name('category.store');
 
+Route::get('category/{id}/update', [CategoryController::class, 'update'])
+    ->middleware('auth')
+    ->name('category.update');
+
+Route::post('category/{id}/update', [CategoryController::class, 'edit'])
+    ->middleware('auth')
+    ->name('category.edit');
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/api.php';

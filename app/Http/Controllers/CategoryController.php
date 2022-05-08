@@ -29,4 +29,22 @@ class CategoryController extends Controller
 
         return view('categories', ['categories' => $categories]);
     }
+
+    public function update($id)
+    {
+        $categoryToUpdate = Category::findOrFail($id);
+
+        return view('updateCategory', ['category' => $categoryToUpdate]);
+    }
+
+    public function edit(Request $request)
+    {
+        $categoryToUpdate = Category::whereId($request->id)->first();
+
+        $categoryToUpdate->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect('/categories');
+    }
 }
